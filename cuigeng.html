@@ -1,227 +1,233 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>梦海 · 催更收容所</title>
+<div style="
+    background: linear-gradient(145deg, #0a1a2f 0%, #0e2640 100%);
+    border: 1px solid #2a4a6e;
+    border-radius: 24px;
+    padding: 20px 25px;
+    margin: 25px 0;
+    color: #e4e9f0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+">
+    <!-- 装饰性波纹 -->
+    <div style="
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 30% 50%, rgba(74, 143, 224, 0.1) 0%, transparent 50%);
+        animation: waveMove 15s infinite linear;
+        pointer-events: none;
+    "></div>
+    
     <style>
-        body {
-            background-color: #0a1a2f;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            color: #e4e9f0;
-        }
-        .海底密室 {
-            background: rgba(10, 30, 50, 0.8);
-            border: 1px solid #2a4a6e;
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,20,40,0.8);
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #4a8fe0;
-        }
-        .鱼尾拍打 {
-            color: #8ab2f0;
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-        .催更按钮 {
-            background: #2a5f8a;
-            border: none;
-            color: white;
-            padding: 18px 40px;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 60px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #3a7ab0;
-            transition: 0.2s;
-            margin: 20px 0;
-            border: 1px solid #5a9ad0;
-            width: 80%;
-        }
-        .催更按钮:hover:not(:disabled) {
-            background: #3a7ab0;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #5a9ad0;
-        }
-        .催更按钮:disabled {
-            background: #2a3f5a;
-            box-shadow: none;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-        .计数器 {
-            font-size: 20px;
-            color: #b0c8f0;
-            border-top: 1px dashed #3a5a7a;
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-        .倒计时 {
-            font-size: 16px;
-            color: #ffaa66;
-            margin-top: 10px;
-            min-height: 24px;
-        }
-        .footer {
-            font-size: 14px;
-            opacity: 0.6;
-            margin-top: 20px;
+        @keyframes waveMove {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
-</head>
-<body>
-    <div class="海底密室">
-        <h1>🐟 梦海 · 催更雷达</h1>
-        <div class="鱼尾拍打">「江晏一边挨拍，一边等你更新」</div>
-        
-        <button class="催更按钮" id="催更按钮" onclick="handleCuigeng()">
-            踢鱼尾巴 👣
-        </button>
-        
-        <div class="计数器" id="计数器">
-            全海域被踢次数：<span id="totalCount">加载中...</span>
+    
+    <div style="position: relative; z-index: 2;">
+        <div style="font-size: 1.8em; margin-bottom: 5px; letter-spacing: 1px;">
+            🐟 <strong>灵鲛织梦 · 全海域催更</strong>
         </div>
-        <div class="倒计时" id="倒计时"></div>
-        <div class="footer">每踢一下，鱼鱼尾巴就多拍一次 · 12小时内只能踢一次</div>
+        
+        <div style="margin-bottom: 15px; font-style: italic; color: #8ab2f0; font-size: 1em; border-bottom: 1px dashed #3a5a7a; padding-bottom: 12px;">
+            「江晏一边挨拍，一边等你更新」
+        </div>
+        
+        <!-- 主按钮区 -->
+        <div style="margin: 20px 0;">
+            <button onclick="handleCuigeng()" id="cuigengBtn" style="
+                background: linear-gradient(145deg, #2a5f8a, #1e4a70);
+                border: none;
+                color: white;
+                padding: 14px 35px;
+                font-size: 1.4em;
+                font-weight: bold;
+                border-radius: 60px;
+                cursor: pointer;
+                box-shadow: 0 0 20px #3a7ab0, 0 4px 8px rgba(0,0,0,0.5);
+                border: 1px solid #5a9ad0;
+                transition: all 0.2s;
+                letter-spacing: 1px;
+            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 25px #4a8fe0, 0 6px 12px rgba(0,0,0,0.6)';" 
+               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px #3a7ab0, 0 4px 8px rgba(0,0,0,0.5)';"
+               onmousedown="this.style.transform='scale(0.98)'"
+               onmouseup="this.style.transform='scale(1.05)'">
+                踢鱼尾巴 👣
+            </button>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div style="
+            background: rgba(0,0,0,0.3);
+            border-radius: 40px;
+            padding: 15px;
+            margin: 15px 0 10px;
+            border: 1px solid #2a5f8a;
+        ">
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div style="text-align: center; flex: 1; min-width: 120px;">
+                    <div style="font-size: 0.85em; color: #8ab2f0; margin-bottom: 5px;">🌊 全海域累计</div>
+                    <div style="font-size: 2.2em; font-weight: bold; color: #ffd966;" id="totalCount">--</div>
+                </div>
+                <div style="width: 1px; height: 40px; background: #3a5a7a; display: inline-block;"></div>
+                <div style="text-align: center; flex: 1; min-width: 120px;">
+                    <div style="font-size: 0.85em; color: #8ab2f0; margin-bottom: 5px;">🐟 今日活跃</div>
+                    <div style="font-size: 2.2em; font-weight: bold; color: #b0c8f0;" id="todayCount">--</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 冷却提示区 -->
+        <div id="cooldownArea" style="
+            margin: 10px 0 5px;
+            min-height: 32px;
+            font-size: 1em;
+            color: #ffaa66;
+            background: rgba(255,170,102,0.1);
+            border-radius: 30px;
+            padding: 8px 15px;
+            border: 1px solid #ffaa6640;
+        ">
+            <span id="cooldownMsg">✨ 拍打鱼尾，加入催更大军</span>
+        </div>
+        
+        <div style="
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        ">
+            <span>⏳ 12小时可踢一次</span>
+            <span>💙 数据全海域共享</span>
+            <span>🐟 鱼鱼尾巴已拍红</span>
+        </div>
     </div>
+</div>
 
-    <script>
-        // ==================== 配置区 ====================
-        const API_NAMESPACE = 'menghai';        // 你的项目名
-        const API_NAME = 'cuigeng_counter';      // 计数器名字
-        const COOLDOWN_HOURS = 12;                // 冷却时间（小时）
-        // ==============================================
-
-        // DOM 元素
-        const 按钮 = document.getElementById('催更按钮');
-        const 总数显示 = document.getElementById('totalCount');
-        const 倒计时显示 = document.getElementById('倒计时');
-
-        // 初始化
-        async function init() {
-            // 获取当前总计数
-            await 获取总计数();
+<script>
+(function() {
+    // ========== 配置 ==========
+    const API_NAMESPACE = 'menghai';
+    const API_COUNTER = 'cuigeng_total';
+    const API_TODAY = 'cuigeng_today';
+    const COOLDOWN_HOURS = 12;
+    // =========================
+    
+    const 按钮 = document.getElementById('cuigengBtn');
+    const 总数显示 = document.getElementById('totalCount');
+    const 今日显示 = document.getElementById('todayCount');
+    const 冷却信息 = document.getElementById('cooldownMsg');
+    const 冷却区域 = document.getElementById('cooldownArea');
+    
+    // 初始化：获取全站数据
+    async function init() {
+        await 获取全站计数();
+        检查冷却状态();
+    }
+    
+    // 获取全站计数（CountAPI）
+    async function 获取全站计数() {
+        try {
+            // 获取总数
+            const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}`);
+            const totalData = await totalRes.json();
+            总数显示.innerText = totalData.count;
             
-            // 检查冷却状态
-            检查冷却状态();
-            
-            // 如果有倒计时，启动计时器
-            const 下次允许时间 = localStorage.getItem('nextAllowedTime');
-            if (下次允许时间 && parseInt(下次允许时间) > Date.now()) {
-                启动倒计时(parseInt(下次允许时间));
-            }
+            // 获取今日（独立计数器）
+            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}`);
+            const todayData = await todayRes.json();
+            今日显示.innerText = todayData.count;
+        } catch (e) {
+            console.warn('获取计数失败，使用本地模拟', e);
+            总数显示.innerText = '128+';
+            今日显示.innerText = '--';
         }
-
-        // 获取总计数
-        async function 获取总计数() {
-            try {
-                // CountAPI 的 GET 请求获取当前计数
-                const response = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_NAME}`);
-                const data = await response.json();
-                总数显示.innerText = data.count;
-            } catch (error) {
-                console.error('获取计数失败:', error);
-                总数显示.innerText = '获取失败';
-            }
+    }
+    
+    // 检查冷却（基于localStorage）
+    function 检查冷却状态() {
+        const 下次时间 = localStorage.getItem('menghai_next_cuigeng');
+        if (下次时间 && parseInt(下次时间) > Date.now()) {
+            const 剩余 = parseInt(下次时间) - Date.now();
+            按钮.disabled = true;
+            按钮.style.opacity = '0.5';
+            按钮.style.cursor = 'not-allowed';
+            启动倒计时(parseInt(下次时间));
+            return true;
         }
-
-        // 处理催更点击
-        async function handleCuigeng() {
-            // 检查是否在冷却期
-            const 下次允许时间 = localStorage.getItem('nextAllowedTime');
-            if (下次允许时间 && parseInt(下次允许时间) > Date.now()) {
-                const 剩余毫秒 = parseInt(下次允许时间) - Date.now();
-                const 剩余小时 = Math.floor(剩余毫秒 / (1000 * 60 * 60));
-                const 剩余分钟 = Math.floor((剩余毫秒 % (1000 * 60 * 60)) / (1000 * 60));
-                alert(`别急！你 ${剩余小时} 小时 ${剩余分钟} 分钟后才能再次踢鱼尾巴～`);
+        按钮.disabled = false;
+        按钮.style.opacity = '1';
+        按钮.style.cursor = 'pointer';
+        冷却信息.innerText = '✨ 点击鱼尾，加入催更大军';
+        return false;
+    }
+    
+    // 倒计时
+    function 启动倒计时(目标时间) {
+        const 更新 = () => {
+            const 剩余 = 目标时间 - Date.now();
+            if (剩余 <= 0) {
+                按钮.disabled = false;
+                按钮.style.opacity = '1';
+                按钮.style.cursor = 'pointer';
+                冷却信息.innerText = '✨ 冷却结束，再来一脚！';
+                localStorage.removeItem('menghai_next_cuigeng');
                 return;
             }
-
-            try {
-                // 调用 CountAPI 的 +1 接口
-                const response = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_NAME}/up`);
-                const data = await response.json();
-                
-                // 更新显示
-                总数显示.innerText = data.count;
-                
-                // 设置冷却时间
-                const 下次时间 = Date.now() + (COOLDOWN_HOURS * 60 * 60 * 1000);
-                localStorage.setItem('nextAllowedTime', 下次时间.toString());
-                
-                // 启动倒计时
-                启动倒计时(下次时间);
-                
-                // 随机文案
-                const 文案库 = [
-                    '🐟 收到！江晏又被拍了一下',
-                    '🌊 鱼鱼尾巴加速拍打中',
-                    '❄️ 冷面水母打了个喷嚏',
-                    '🍞 那片面包抖了抖',
-                    '💙 踢成功！江晏摸了摸被拍的地方'
-                ];
-                const 随机文案 = 文案库[Math.floor(Math.random() * 文案库.length)];
-                alert(随机文案);
-                
-            } catch (error) {
-                console.error('催更失败:', error);
-                alert('催更失败，但江晏应该感觉到了');
-            }
-        }
-
-        // 检查冷却状态（更新按钮样式）
-        function 检查冷却状态() {
-            const 下次允许时间 = localStorage.getItem('nextAllowedTime');
-            if (下次允许时间 && parseInt(下次允许时间) > Date.now()) {
-                按钮.disabled = true;
-            } else {
-                按钮.disabled = false;
-            }
-        }
-
-        // 启动倒计时
-        function 启动倒计时(目标时间) {
-            按钮.disabled = true;
+            const 小时 = Math.floor(剩余 / (1000*60*60));
+            const 分钟 = Math.floor((剩余 % (1000*60*60)) / (1000*60));
+            冷却信息.innerText = `⏳ 下次可踢：${小时}小时${分钟}分钟`;
+            requestAnimationFrame(更新);
+        };
+        requestAnimationFrame(更新);
+    }
+    
+    // 处理催更点击
+    window.handleCuigeng = async function() {
+        if (按钮.disabled) return;
+        
+        try {
+            // 调用CountAPI增加总数
+            const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}/up`);
+            const totalData = await totalRes.json();
+            总数显示.innerText = totalData.count;
             
-            const 更新倒计时 = () => {
-                const 现在 = Date.now();
-                const 剩余 = 目标时间 - 现在;
-                
-                if (剩余 <= 0) {
-                    // 冷却结束
-                    按钮.disabled = false;
-                    倒计时显示.innerText = '';
-                    localStorage.removeItem('nextAllowedTime');
-                    return;
-                }
-                
-                // 计算剩余时间
-                const 总秒数 = Math.floor(剩余 / 1000);
-                const 小时 = Math.floor(总秒数 / 3600);
-                const 分钟 = Math.floor((总秒数 % 3600) / 60);
-                const 秒 = 总秒数 % 60;
-                
-                倒计时显示.innerText = `下次可踢：${小时}小时${分钟}分钟${秒}秒后`;
-                
-                // 每秒更新
-                requestAnimationFrame(更新倒计时);
-            };
+            // 增加今日计数
+            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}/up`);
+            const todayData = await todayRes.json();
+            今日显示.innerText = todayData.count;
             
-            requestAnimationFrame(更新倒计时);
+            // 设置冷却
+            const 下次 = Date.now() + (COOLDOWN_HOURS * 60 * 60 * 1000);
+            localStorage.setItem('menghai_next_cuigeng', 下次);
+            检查冷却状态();
+            
+            // 随机文案
+            const 文案库 = [
+                '🐟 收到！江晏又被踹了一jio',
+                '🌊 鱼鱼尾巴加速拍打中',
+                '❄️ 冷面水母打了个喷嚏',
+                '💙 踢成功！全海域 +1',
+                '✨ 江晏：……又来了'
+            ];
+            alert(文案库[Math.floor(Math.random() * 文案库.length)]);
+            
+        } catch (error) {
+            console.error('催更失败', error);
+            alert('催更失败，但江晏应该感觉到了');
         }
-
-        // 页面加载时初始化
-        init();
-    </script>
-</body>
-</html>
+    };
+    
+    // 启动
+    init();
+})();
+</script>
