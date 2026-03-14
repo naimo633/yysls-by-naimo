@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Artalk 测试页</title>
+    <!-- Artalk CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: system-ui, sans-serif;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🐟 Artalk 评论区测试页</h1>
+        <p>如果下面能看到评论区，说明一切正常！</p>
+        <div id="artalk-test"></div>
+    </div>
+
+    <!-- Artalk JS -->
+    <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
+    <script>
+        // 等 DOM 加载完再初始化
+        setTimeout(() => {
+            Artalk.init({
+                el: '#artalk-test',
+                server: 'https://artalkjs-production.up.railway.app',
+                site: '鱼鱼书阁测试',
+                pageKey: 'test-page',
+                pageTitle: '测试页面',
+                placeholder: '说点什么测试一下...',
+                // 关掉不必要的功能，减少干扰
+                vote: true,
+                avatar: true,
+                defaultAvatar: 'mp',
+                // 如果是本地测试，可能需要关掉严格 CORS
+                // imgUpload: false,
+            });
+            console.log('Artalk 初始化完成');
+        }, 200); // 加个延迟确保 DOM 已就绪
+    </script>
+</body>
+</html>
