@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>燕云十六声-晏主BG粮仓</title>
+    <!-- Artalk CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.css" rel="stylesheet">
+    <style>
+        * {
+            transition: background-color 0.3s, color 0.2s, border-color 0.2s;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        /* 浅色模式变量 */
+        body.light {
+            --bg: #f5f5f5;
+            --surface: #ffffff;
+            --border: #e0e0e0;
+            --text: #1a1a1a;
+            --text-light: #8c8c8c;
+            --button-bg: #1d8ae4;
+            --button-hover: #63b6f1;
+            --button-text: white;
+        }
+        
+        /* 深色模式变量 */
+        body.dark {
+            --bg: #1a1a1a;
+            --surface: #1e2224;
+            --border: #383838;
+            --text: #e0e0e0;
+            --text-light: #a0a0a0;
+            --button-bg: #1d8ae4;
+            --button-hover: #63b6f1;
+            --button-text: white;
+        }
+        
+        .test-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 30px;
+            line-height: 1.5em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h1 {
+            margin-top: 0;
+            color: var(--text);
+        }
+        
+        p {
+            color: var(--text-light);
+        }
+        
+        /* 主题切换按钮 */
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .theme-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: 0.2s;
+        }
+        
+        .theme-btn.active {
+            background: var(--button-bg);
+            color: white;
+        }
+        
+        .theme-btn:not(.active):hover {
+            background: var(--border);
+            color: var(--text);
+        }
+        
+        /* 催更栏 - 使用CSS变量 */
+        .cuigeng-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        
+        .cuigeng-stats {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .fish-icon {
+            font-size: 1.5em;
+        }
+        
+        .stats-text {
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        
+        .stats-numbers {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        
+        .total-number {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--button-bg);
+        }
+        
+        .today-number {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+        
+        .cuigeng-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cooldown-badge {
+            background: var(--border);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+        
+        .cuigeng-btn {
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(44,124,176,0.2);
+        }
+        
+        .cuigeng-btn:hover {
+            background: var(--button-hover);
+        }
+        
+        /* 登录状态提示（可选） */
+        .login-note {
+            text-align: right;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+        /* ===== 让一级评论像文章 ===== */
+        .artalk-content .atk-comment:not(.atk-reply) {
+        /* 大间距 */
+        margin-bottom: 30px;
+        padding: 25px 25px 15px 25px;
+    
+        /* 大字号 */
+        font-size: 1.1em;
+        line-height: 1.8;
+    
+        /* 让内容更像文章段落 */
+        word-break: break-word;
+        text-rendering: optimizeLegibility;
+        }
+
+      /* 一级评论的内容区（让文字更舒展） */
+        .artalk-content .atk-comment:not(.atk-reply) .atk-comment-content {
+        font-size: 1.05em;
+        line-height: 1.8;
+        margin: 15px 0;
+        color: var(--text);
+      }
+
+      /* 一级评论的元信息（作者、时间）调整 */
+      .artalk-content .atk-comment:not(.atk-reply) .atk-comment-meta {
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        color: var(--text-light);
+        border-bottom: 1px dashed var(--border);
+        padding-bottom: 10px;
+    }
+
+    /* ===== 二级及以下回复 ===== */
+    .artalk-content .atk-reply {
+    /* 小间距 */
+    margin-bottom: 12px;
+    padding: 12px 15px 8px 15px;
+    
+    /* 小字号 */
+    font-size: 0.95em;
+    line-height: 1.5;
+
+    /* ===== 响应式优化 ===== */
+    @media (max-width: 600px) {
+    .artalk-content .atk-comment:not(.atk-reply) {
+        padding: 18px 15px;
+        font-size: 1em;
+    }
+    
+    .artalk-content .atk-reply {
+        margin-left: 10px;
+        padding: 10px 12px;
+    }
+    }
+    </style>
+</head>
+<body class="light">
+    <!-- 主题切换按钮 -->
+    <div class="theme-switch">
+        <button class="theme-btn active" onclick="switchTheme('light')">白天</button>
+        <button class="theme-btn" onclick="switchTheme('dark')">黑夜</button>
+    </div>
+
+    <div class="test-container">
+        <h1>晏主BG粮仓</h1>
+        <p>搭了一个迷你论坛，大家随意聊，可匿名发布！（只能聊晏主BG喔）<br/>
+          欢迎产粮老师入驻，入驻可获得专属id和个人简介卡喔~<br/>
+          发动态需要人工审核，审核成功后显示，评论是机审（腾讯云+阿里云+关键词屏蔽）请大家文明发言，和谐友爱~
+        </p>
+        
+        <!-- 催更栏 -->
+        <div class="cuigeng-bar" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+    <!-- 左侧：计数双框（左右并排） -->
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div style="display: flex; align-items: baseline; gap: 5px;">
+            <span style="font-size: 0.9em; color: var(--text-light);"></span>
+            <span style="font-size: 2em; font-weight: 600; color: var(--button-bg);" id="totalCount">--</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 5px;">
+            <span style="font-size: 0.9em; color: var(--text-light);">今日+</span>
+            <span style="font-size: 1em; font-weight: 600; color: #7eaeec;" id="todayCount">--</span>
+        </div>
+    </div>
+    
+    <!-- 右侧：按钮和文案（垂直排列） -->
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+        <button onclick="handleAnonymousKick()" style="
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 6px 28px;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(44,124,176,0.2);
+            letter-spacing: 2px;
+        " onmouseover="this.style.background='var(--button-hover)'" onmouseout="this.style.background='var(--button-bg)'">
+            催 更
+        </button>
+    </div>
+</div>
+    
+    <!-- 随机文案显示区 -->
+    <div id="randomMessage" style="
+            font-size: 0.85em;
+            color: var(--text-light);
+            text-align: center;
+            min-height: 20px;
+            white-space: nowrap;
+        ">
+            来踢一脚吧，没有催更铲不动惹T^T
+        </div>
+</div>
+        
+        <!-- 登录提示（可选） -->
+        <div class="login-note">
+            点赞/回复需登录
+        </div>
+        
+        <!-- Artalk 评论区容器 -->
+        <div id="artalk-test"></div>
+    </div>
+
+    <!-- Artalk JS -->
+    <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
+    <script>
+        // 全局变量，保存 Artalk 实例
+        let artalkInstance = null;
+
+        // ========== 主题切换功能 ==========
+        window.switchTheme = function(theme) {
+            document.body.className = theme;
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(theme === 'light' ? '浅色' : '深色')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            localStorage.setItem('theme', theme);
+            
+            // 同步 Artalk 的深色模式
+            if (artalkInstance) {
+                artalkInstance.setDarkMode(theme === 'dark');
+            }
+        };
+
+        // ========== 加载保存的主题 ==========
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.className = savedTheme;
+        
+        setTimeout(() => {
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(savedTheme === 'light' ? '浅色' : '深色')) {
+                    btn.classList.add('active');
+                }
+            });
+        }, 0);
+
+        // ========== Artalk 初始化 ==========
+        setTimeout(() => {
+            artalkInstance = Artalk.init({
+                el: '#artalk-test',
+                server: 'https://artalkjs-production.up.railway.app',
+                site: '测试',
+                pageKey: 'test-page',
+                pageTitle: '测试页面',
+                placeholder: '说点什么...',
+                login: true,  // 显示登录按钮！关键参数
+                darkMode: document.body.classList.contains('dark'),
+            });
+            console.log('Artalk 初始化完成，登录按钮已启用');
+            
+            // #标签高亮功能
+            setInterval(() => {
+                document.querySelectorAll('.artalk-content').forEach(el => {
+                    if (el.dataset.hashtagProcessed) return;
+                    
+                    const regex = /#([\w\u4e00-\u9fa5]+)/g;
+                    el.innerHTML = el.innerHTML.replace(regex, '<span class="hashtag" style="color: var(--button-bg); font-weight:500;">#$1</span>');
+                    el.dataset.hashtagProcessed = 'true';
+                });
+            }, 500);
+        }, 200);
+
+        // ========== 入驻作者白名单（用户名 ⇔ 邮箱绑定）==========
+        const AUTHOR_WHITELIST = [
+          { name: '奶沫', email: 'fancuo019@outlook.com' },
+          { name: 'WJNing', email: 'fancuo019@outlook.com' },
+          { name: '喵喵怪', email: '1056452365@qq.com' },
+        ];
+
+        // ========== 工具函数 ==========
+        function findAuthorByName(name) {
+          return AUTHOR_WHITELIST.find(author => author.name === name);
+        }
+
+// ========== 监听评论提交 ==========
+document.addEventListener('artalk:comment-submit', (e) => {
+    const currentUser = artalkInstance?.getUser();
+    const commentData = e.detail?.comment || {};
+    const userName = commentData.nick || currentUser?.nick;
+    const userEmail = commentData.email || currentUser?.email;
+    
+    const author = findAuthorByName(userName);
+    
+    // 如果用户名在白名单内
+    if (author) {
+        // 必须登录且邮箱匹配
+        if (!currentUser || !currentUser.email) {
+            e.preventDefault();
+            alert('「' + userName + '」是入驻作者专属ID，请使用绑定的邮箱登录。');
+            return;
+        }
+        
+        if (userEmail !== author.email) {
+            e.preventDefault();
+            alert('「' + userName + '」已被站内作者占用，请使用正确的邮箱登录。');
+            return;
+        }
+        
+        // 白名单作者，邮箱正确 ✅ 允许发布
+        console.log('作者 ' + userName + ' 发表评论');
+        return;
+    }
+    
+    // 用户名不在白名单内 ✅ 任何人都可以发
+    console.log('普通用户 ' + (userName || '匿名') + ' 发表评论');
+});
+
+// ========== 实时监控未登录用户使用白名单名字 ==========
+setInterval(() => {
+    const nickInput = document.querySelector('.artalk-input-nick input');
+    if (!nickInput) return;
+    
+    const inputName = nickInput.value.trim();
+    let warning = document.getElementById('author-name-warning');
+    
+    if (inputName && findAuthorByName(inputName)) {
+        if (!warning) {
+            warning = document.createElement('div');
+            warning.id = 'author-name-warning';
+            warning.style.cssText = `
+                color: #d9534f;
+                font-size: 0.85em;
+                margin: 4px 0;
+                padding: 6px 10px;
+                background: #fdf1f0;
+                border-radius: 4px;
+                border-left: 3px solid #d9534f;
+            `;
+            nickInput.parentNode.appendChild(warning);
+        }
+        warning.textContent = '「' + inputName + '」是入驻作者专属ID，请使用绑定的邮箱登录。';
+    } else {
+        if (warning) warning.remove();
+    }
+}, 500);
+
+        // ========== 催更功能 ==========
+        (function() {
+    // ========== 配置 ==========
+    const API_NAMESPACE = 'yuyu_anonymous';
+    const API_COUNTER = 'total_cuigeng';
+    const API_TODAY = 'today_cuigeng';
+    // =========================
+    
+    const 总数显示 = document.getElementById('totalCount');
+    const 今日显示 = document.getElementById('todayCount');
+    const 消息框 = document.getElementById('randomMessage');
+    
+    // 古风文案库
+    const 文案库 = [
+        '江晏脊背一震，又挨一尾',
+        '江晏：今夜想用什么姿势？',
+        '冷面水母打了个喷嚏',
+        '那片面包啪叽一下，甩江晏脸上',
+        '江晏：（侧目）又是何人？',
+        '江晏：（无奈）调皮！',
+        '牵了手，就要负责喔。',
+        '江晏：想吃鹌鹑腿还是面包？还是……我？',
+        '江晏：可还记得回家的路？',
+        '江晏：（无奈）小宝，别闹了。',
+    ];
+    
+    // 初始化计数
+    async function 初始化() {
+        await 获取全站计数();
+    }
+    
+    async function 获取全站计数() {
+        try {
+            const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}`);
+            const totalData = await totalRes.json();
+            总数显示.innerText = totalData.count;
+            
+            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}`);
+            const todayData = await todayRes.json();
+            今日显示.innerText = todayData.count;
+        } catch (e) {
+            console.warn('获取计数失败，用默认值', e);
+            总数显示.innerText = '9999';
+            今日显示.innerText = '请点击后查看';
+        }
+    }
+    
+    // 处理匿名踢（无冷却）
+    window.handleAnonymousKick = async function() {
+        try {
+            // 增加总数
+            const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}/up`);
+            const totalData = await totalRes.json();
+            总数显示.innerText = totalData.count;
+            
+            // 增加今日
+            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}/up`);
+            const todayData = await todayRes.json();
+            今日显示.innerText = todayData.count;
+            
+            // 随机文案
+            const 随机索引 = Math.floor(Math.random() * 文案库.length);
+            消息框.innerText = `${文案库[随机索引]}`;
+            
+            // 4秒后恢复默认
+            setTimeout(() => {
+                消息框.innerText = '感谢少东家的支持！';
+            }, 4000);
+            
+        } catch (error) {
+            console.error('催更失败', error);
+            消息框.innerText = '墨尽，但江晏已知';
+        }
+    };
+    
+    // 启动
+    初始化();
+})();
+
+    </script>
+</body>
+</html>
