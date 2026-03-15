@@ -1,0 +1,697 @@
+/* ===== style.css - 毛玻璃阅读器样式 ===== */
+
+/* 重置默认边距 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.light {
+            --bg: #f5f5f5;
+            --background: rgba(255, 255, 255, 0.2); 
+            --surface: #ffffff;
+            --border: #e0e0e0;
+            --text: #1a1a1a;
+            --text-tag:#4e66ee;
+            --text-meta:#3d4e6d;
+            --text-light: #8c8c8c;
+            --button-bg: #1d8ae4;
+            --button-hover: #63b6f1;
+            --button-text: white;
+            --title-image: url('./image/title_l.png');
+        }
+        
+/* 深色模式变量 */
+body.dark {
+    --bg: #1a1a1a;
+    --background: rgba(0, 0, 0, 0.2); 
+    --surface: #1e2224;
+    --border: #383838;
+    --text: #e0e0e0;
+    --text-tag:#8999f1;
+    --text-meta:#cedaf0;
+    --text-light: #a0a0a0;
+    --button-bg: #1d8ae4;
+    --button-hover: #63b6f1;
+    --button-text: white;
+    --title-image: url('./image/title_d.png');
+}
+
+/* 页面主体：背景图片 */
+body {
+    /* 背景图片 - 替换成你的图片链接 */
+    background-image: url('./image/background.png'); /* 示例图，请替换 */
+    background-color: var(--bg);
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', '宋体', serif;
+    
+    /* 让 body 作为网格容器，水平垂直居中 */
+    display: grid;
+    place-items: center;
+}
+
+
+    .title-image {
+        content: var(--title-image); 
+        display: block;
+        width: 30%;
+        max-width: 400px;
+        min-width: 150px;
+        height: auto;
+        margin: 250px 0 0 0;
+        }
+   
+/* ===== 左上角悬浮工具栏 ===== */
+.top-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    background: var(--surface);
+    padding: 8px 12px;
+    border-radius: 40px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px);
+}
+
+.top-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.top-btn:hover {
+    background: var(--border);
+}
+
+/* 主题切换容器 */
+.theme-container {
+    position: relative;
+}
+
+/* 主题主按钮（小月亮） */
+.theme-main-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text);
+}
+
+.theme-main-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.theme-main-btn.active {
+    background: var(--button-bg);
+    color: white;
+    border-color: var(--button-bg);
+}
+
+/* 主题展开条 - 默认隐藏 */
+.theme-expand-bar {
+    position: absolute;
+    top: 0;
+    left: 60px;  /* 紧贴主按钮右侧 */
+    display: flex;
+    gap: 8px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 40px;
+    padding: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    z-index: 1001;
+}
+
+/* 展开状态 */
+.theme-expand-bar.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* 主题选项按钮 */
+.theme-option {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.theme-option:hover {
+    background: var(--border);
+    color: var(--text);
+}
+
+.theme-option.active {
+    background: var(--button-bg);
+    color: white;
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+    .top-left-tools {
+        top: 20px;
+        left: 20px;
+        gap: 10px;
+    }
+    
+    .back-to-top,
+    .theme-main-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+    
+    .theme-expand-bar {
+        left: 52px;
+        padding: 4px;
+    }
+    
+    .theme-option {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+}
+
+/* 外层容器：限制最大宽度，同时保持居中 */
+.outer-container {
+    background-color: var(--background);
+    backdrop-filter: blur(12px);             /* 毛玻璃模糊程度 */
+    -webkit-backdrop-filter: blur(12px);
+    padding: 110px 35px 0px 35px;
+    max-width: 800px;  /* 电脑上阅读宽度，可调整 */
+    width: 100%;   
+    /* 让容器撑满高度，但不影响在 body 中的居中 */
+    min-height: 100vh;
+    line-height: 1.8;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+
+/* 阅读器卡片：毛玻璃效果 */
+.reader {
+    /* 卡片内部内容从上到下排列 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto; 
+    min-height: 500px; 
+    width: 100%;
+}
+
+/* 文章标题 */
+.article-title {
+    font-size: 2.2em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1a2a3a;
+    line-height: 1.8;
+}
+
+/* 元信息 */
+.article-meta {
+    color: var(--text-meta);
+    margin-left: 2em;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* ===== 催更栏样式 ===== */
+.cuigeng-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px;
+}
+
+/* 左侧计数容器 - 靠左不留空隙 */
+.cuigeng-left {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8em;  /* 抵消外层可能的边距，可根据需要调整 */
+}
+
+/* 计数数字容器 */
+.cuigeng-numbers {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+/* 总数数字 */
+.cuigeng-total {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--button-bg);
+}
+
+/* 右侧按钮容器 */
+.cuigeng-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+/* 催更按钮 */
+.cuigeng-btn {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    padding: 8px 32px;
+    margin: 20px 0;
+}
+
+.cuigeng-btn:hover {
+    background: var(--button-hover);
+}
+
+/* ===== 选项卡样式 ===== */
+.tab-header {
+    display: flex;
+    padding-bottom: 10px;
+    width: 100%; 
+}
+
+.tab-btn {
+    flex: 1;        
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.tab-btn.active {
+    background: var(--button-bg);
+    color: white;
+    opacity: 1;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ===== 作品卡片样式 ===== */
+.work-card {
+    display: flex;
+    backdrop-filter: none;
+    gap: 25px;
+    padding: 20px 0;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.5s;
+}
+
+.work-card:last-child {
+    border-bottom: none;
+}
+
+.work-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.work-cover {
+    font-size: 3.5em;
+    min-width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 16px;
+    border: none;
+}
+
+.work-info {
+    flex: 1;
+}
+
+.work-title {
+    font-size: 1.5em;
+    margin: 8px 0 8px 0;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.work-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    flex-wrap: wrap;
+}
+
+.work-author {
+    font-weight: 500;
+    color: var(--button-bg);
+}
+
+.work-divider {
+    opacity: 0.5;
+}
+
+.work-status {
+    font-size: 0.85em;
+}
+
+.work-desc {
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 1em;
+}
+
+.work-tags {
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.work-tags .tag {
+    background: var(--border);
+    color: var(--text-light);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.work-links {
+    display: flex;
+    gap: 20px;
+}
+
+.work-link {
+    color: var(--button-bg);
+    text-decoration: none;
+    font-size: 0.95em;
+    padding: 5px 0;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.work-link:hover {
+    border-bottom-color: var(--button-bg);
+}
+
+/* 即将到来的作品卡片 */
+.work-card.coming-soon {
+    opacity: 0.8;
+}
+
+.work-card.coming-soon .work-cover {
+    border-color: var(--text-light);
+}
+
+/* ===== Artalk 评论区样式适配毛玻璃 ===== */
+#artalk-test {
+    margin-top: 40px;
+}
+
+/* 评论区整体容器 */
+.artalk {
+    --artalk-color: var(--text);
+    --artalk-bg: transparent !important;  /* 透明背景，让父级毛玻璃透出来 */
+    --artalk-border: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== 评论区输入框毛玻璃适配 ===== */
+
+/* 评论输入框容器 */
+.artalk-editor {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    margin-bottom: 20px !important;
+}
+
+/* 输入框本身 */
+.artalk-editor textarea,
+.artalk-editor input {
+    background: rgba(0, 0, 0, 0.2) !important;  /* 半透明深色底，让文字更清晰 */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    color: var(--text) !important;
+    padding: 10px !important;
+    font-size: 1em !important;
+}
+
+/* 输入框获得焦点时 */
+.artalk-editor textarea:focus,
+.artalk-editor input:focus {
+    border-color: var(--button-bg) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(29, 138, 228, 0.3) !important;
+}
+
+/* 昵称、邮箱、网址输入框区域 */
+.artalk-editor .atk-editor-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.artalk-editor .atk-editor-info input {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* 提交按钮 */
+.artalk-editor .atk-editor-submit {
+    background: var(--button-bg) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 10px 24px !important;
+    font-size: 1em !important;
+    cursor: pointer !important;
+    transition: 0.2s !important;
+}
+
+.artalk-editor .atk-editor-submit:hover {
+    background: var(--button-hover) !important;
+    transform: translateY(-1px);
+}
+
+/* 登录/注册相关按钮 */
+.artalk-editor .atk-editor-login {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#artalk-test,
+.artalk,
+.artalk-editor,
+.atk-editor-wrap,
+.atk-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 140px;
+    box-sizing: border-box !important;
+}
+
+/* 确保文本输入框也跟随 */
+.atk-textarea {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    resize: vertical;  /* 允许垂直调整大小，但宽度固定 */
+}
+
+/* 如果还有内联样式干扰，用这个强制重置 */
+.atk-textarea[style] {
+    width: 100% !important;
+}
+
+/* 评论内容文字 */
+.artalk-content {
+    color: var(--text) !important;
+}
+
+/* 评论元信息（作者、时间） */
+.artalk-comment-meta {
+    color: var(--text-light) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+/* 一级评论特殊样式 */
+.artalk-comment-item:not(.is-reply) {
+
+}
+
+/* 二级回复 */
+.artalk-comment-item.is-reply {
+    margin-left: 20px !important;
+
+}
+
+/* 登录按钮等操作元素 */
+.artalk-btn {
+    background: var(--button-bg) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 6px 16px !important;
+}
+
+.artalk-btn:hover {
+    background: var(--button-hover) !important;
+}
+
+
+
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+    .work-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .work-meta {
+        justify-content: center;
+    }
+    
+    .work-links {
+        justify-content: center;
+    }
+}
+
+/* 正文段落 */
+.article-content p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+    text-indent: 2em;
+    color: var(--text);
+}
+
+/* 对话标签 */
+.text-tag {
+    font-weight: 600;
+    color: var(--text-tag);
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* 手机屏幕优化：完全撑满，不留空隙 */
+@media (max-width: 768px) {
+    body {
+        place-items: stretch;  /* 取消居中，改为拉伸 */
+    }
+    .outer-container {
+        max-width: 100%;
+        padding: 0;            /* 去掉所有内边距，让卡片贴边 */
+        min-height: 100vh;
+    }
+    .reader {
+        border-radius: 0;       /* 去掉圆角 */
+        padding: 25px 20px;     /* 减小内边距 */
+        min-height: 100vh;       /* 撑满全屏高度 */
+        border: none;            /* 去掉边框 */
+        box-shadow: none;         /* 去掉阴影 */
+        border-left: none;
+        border-right: none;
+    }
+    .author-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }   
+    .author-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+    }  
+    .author-tags {
+        justify-content: center;
+    }
+}
+
+/* 超小屏优化 */
+@media (max-width: 480px) {
+    .article-title {
+        font-size: 1.8em;
+    }
+    .article-content p {
+        font-size: 1.1em;
+        line-height: 1.7;
+    }
+}
