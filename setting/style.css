@@ -24,7 +24,7 @@ body.light {
             --color-pink: #e66f6f;
             --color-yellow: #caa70b;
             --color-green: #459476;
-            --title-image: url('./setting/image/title_l.png');
+            --title-image: url('./image/title_l.png');
         }
         
 /* 深色模式变量 */
@@ -45,7 +45,7 @@ body.dark {
     --color-pink: #f1c1c1;
     --color-yellow: #e9d788;
     --color-green: #9fe2c9;
-    --title-image: url('./setting/image/title_d.png');
+    --title-image: url('./image/title_d.png');
 }
 
 /* 页面主体：背景图片 */
