@@ -560,7 +560,7 @@ body {
     --at-color-pink: var(--color-pink);
     --at-color-yellow: var(--color-yellow);
     --at-color-green: var(--color-green);
-    --at-color-gradient: linear-gradient(180deg, transparent, var(--bg));
+    --at-color-gradient: linear-gradient(180deg, rgba(from var(--bg) r g b / 0), var(--bg));
 }
 
 .atk-main-editor>.atk-textarea-wrap>.atk-textarea {
