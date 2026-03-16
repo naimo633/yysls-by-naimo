@@ -551,7 +551,7 @@ body {
     --at-color-sub: #757575;
     --at-color-grey: #747474;
     --at-color-meta: var(--text-light);
-    --at-color-border: var(--background);
+    --at-color-border: var(--border);
     --at-color-light: var(--at-color-main);
     --at-color-bg-transl: var(--background);
     --at-color-bg-light: rgba(29, 161, 242, .1);
