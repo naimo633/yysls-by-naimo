@@ -622,7 +622,7 @@ body {
 
 .atk-comment>.atk-main>.atk-body {
     font-size: 18px;  /* 放大字号 */
-    line-height: 1.8;
+    line-height: 1.5;
     margin: 15px 0 !important;
     padding: 0 !important;
     color: var(--text);
@@ -633,6 +633,16 @@ body {
 .atk-content p {
     margin-bottom: 1em !important;
     margin-top: 0 !important;
+}
+
+/* Tag 样式 */
+.hashtag {
+    color: var(--text-tag);           /* 你的蓝色 */
+}
+
+/* 深色模式适配 */
+body.dark .hashtag {
+    color: #63b6f1;
 }
 
 /* ===== 深色模式适配 ===== */
