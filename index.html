@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>与晏同归</title>
+    <title>与晏同归-晏主BG同人交流站</title>
     <!-- 引用同一目录下的 CSS 文件 -->
     <link rel="stylesheet" href="setting/style.css">
 </head>
@@ -11,16 +11,19 @@
 <body class="light">
    <!-- 右上角工具栏 -->
    <div class="top-bar">
-        <button class="top-btn" onclick="toggleTheme()">🌙</button>
-        <button class="top-btn" onclick="scrollToTop()">⬆️</button>
+        <button class="top-btn" onclick="toggleTheme()"><img src="./setting/image/light.png"></button>
+        <button class="top-btn" onclick="scrollToTop()"><img src="./setting/image/top.png"></button>
+        <button class="top-btn" onclick="window.location.href='./work/content.html'"><img src="./setting/image/content.png" alt="文章列表"></button>
     </div>     
 
     <!-- 外层容器：负责宽度限制和内部排列 -->
     <div class="outer-container">
-        <img class="title-image" src="" alt="与晏同归">
-        <div class="article-meta">
-            <p>江晏×少东家</p>
-            <p>燕云十六声同人无盈利同人交流网站</p>
+        <div class="title-background">
+            <img class="title-image" src="" alt="与晏同归">
+            <div class="article-meta">
+                <p>江晏×少东家</p>
+                <p>燕云十六声-无盈利同人交流站</p>
+            </div>
         </div>
         <!-- 催更栏 -->
         <div class="cuigeng-bar">
@@ -35,127 +38,14 @@
                 <button class="cuigeng-btn" onclick="handleAnonymousKick()">催 更</button>
             </div>
         </div>
-        <div id="randomMessage" style="
-                font-size: 0.9em;
-                color: var(--text-meta);
-                text-align: left;
-                margin-left: 2em;
-                margin-bottom: 2em;
-                min-height: 20px;
-                white-space: nowrap;
-            ">
+        <div id="randomMessage" class="randomMessage">
                 来踢一脚吧，没有催更铲不动惹T^T
         </div>
-
-        <div class="reader">
-        <!-- 选项卡头部 -->
-        <div class="tab-header">
-            <button class="tab-btn active" id="btn-author" onclick="switchTab('author')">📖 作者卡片</button>
-            <button class="tab-btn" id="btn-article" onclick="switchTab('article')">📝 文章正文</button>
-        </div>
-    
-        <!-- 作者卡片集内容 -->
-        <div id="tab-author" class="tab-content active">
-            <div class="work-card">
-        <div class="work-cover">📖</div>
-        <div class="work-info">
-            <h2 class="work-title">灵鲛织梦</h2>
-            <div class="work-meta">
-                <span class="work-author">奶沫</span>
-                <span class="work-divider">·</span>
-                <span class="work-wordcount">5w字</span>
-                <span class="work-divider">·</span>
-                <span class="work-status">古代言情</span>
-            </div>
-            <p class="work-desc">不会盘腿的鲛人，冷面水母剑客，一片面包引发的血案。转世重逢，是甜是刀？</p>
-            <div class="work-tags">
-                <span class="tag">人鱼BE</span>
-                <span class="tag">转世</span>
-                <span class="tag">古风</span>
-                <span class="tag">江晏×鱼鱼</span>
-            </div>
-            <div class="work-links">
-                <a href="#" class="work-link">阅读全文</a>
-                <a href="#" class="work-link">评论</a>
-            </div>
-        </div>
-            </div>
-            <div class="work-card">
-                <div class="work-cover">📖</div>
-                <div class="work-info">
-            <h2 class="work-title">灵鲛织梦</h2>
-            <div class="work-meta">
-                <span class="work-author">奶沫</span>
-                <span class="work-divider">·</span>
-                <span class="work-wordcount">5w字</span>
-                <span class="work-divider">·</span>
-                <span class="work-status">古代言情</span>
-            </div>
-            <p class="work-desc">不会盘腿的鲛人，冷面水母剑客，一片面包引发的血案。转世重逢，是甜是刀？</p>
-            <div class="work-tags">
-                <span class="tag">人鱼BE</span>
-                <span class="tag">转世</span>
-                <span class="tag">古风</span>
-                <span class="tag">江晏×鱼鱼</span>
-            </div>
-            <div class="work-links">
-                <a href="#" class="work-link">阅读全文</a>
-                <a href="#" class="work-link">评论</a>
-            </div>
-                </div>
-            </div>
-
-        </div>
-    
-        <!-- 文章正文内容 -->
-        <div id="tab-article" class="tab-content">
-            <div id="artalk-test"></div>
+        <div id="artalk">
             <!-- Artalk JS -->
             <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
         </div>
     </div>
-    
-<script>
-// 等待页面完全加载后再执行
-window.onload = function() {
-    console.log('页面加载完成，初始化选项卡');
-    
-    // 获取元素
-    const btnAuthor = document.getElementById('btn-author');
-    const btnArticle = document.getElementById('btn-article');
-    const tabAuthor = document.getElementById('tab-author');
-    const tabArticle = document.getElementById('tab-article');
-    
-    // 检查元素是否存在
-    console.log('作者按钮:', btnAuthor);
-    console.log('文章按钮:', btnArticle);
-    console.log('作者标签:', tabAuthor);
-    console.log('文章标签:', tabArticle);
-    
-    // 定义切换函数（挂在 window 上，让 onclick 能调用）
-    window.switchTab = function(tabName) {
-        console.log('切换选项卡:', tabName);
-        
-        if (tabName === 'author') {
-            // 显示作者卡片
-            tabAuthor.classList.add('active');
-            tabArticle.classList.remove('active');
-            
-            // 按钮激活状态
-            btnAuthor.classList.add('active');
-            btnArticle.classList.remove('active');
-        } else {
-            // 显示文章
-            tabArticle.classList.add('active');
-            tabAuthor.classList.remove('active');
-            
-            // 按钮激活状态
-            btnArticle.classList.add('active');
-            btnAuthor.classList.remove('active');
-        }
-    };
-};
-</script>
 </body>
 </html>
 
@@ -184,7 +74,8 @@ function toggleTheme() {
     // 更新按钮图标
     const themeBtn = document.querySelector('.top-btn:first-child');
     if (themeBtn) {
-        themeBtn.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        themeBtn.innerHTML = newTheme === 'light' ? '<img src="./image/light.png">' 
+    : '<img src="./image/dark.png">';
     }
     
     // 同步 Artalk 主题（如果你有 artalkInstance）
@@ -204,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化按钮图标
     const themeBtn = document.querySelector('.top-btn:first-child');
     if (themeBtn) {
-        themeBtn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+       themeBtn.innerHTML = newTheme === 'light' ? '<img src="./setting/image/light.png">' 
+    : '<img src="./setting/image/dark.png">';
     }
 });
 
@@ -243,14 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}`);
             const totalData = await totalRes.json();
             总数显示.innerText = totalData.count;
-            
-            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}`);
-            const todayData = await todayRes.json();
-            今日显示.innerText = todayData.count;
         } catch (e) {
             console.warn('获取计数失败，用默认值', e);
             总数显示.innerText = '--';
-            今日显示.innerText = ' ';
         }
     }
     
@@ -261,12 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const totalRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_COUNTER}/up`);
             const totalData = await totalRes.json();
             总数显示.innerText = totalData.count;
-            
-            // 增加今日
-            const todayRes = await fetch(`https://api.counterapi.dev/v1/${API_NAMESPACE}/${API_TODAY}/up`);
-            const todayData = await todayRes.json();
-            今日显示.innerText = todayData.count;
-            
+                     
             // 随机文案
             const 随机索引 = Math.floor(Math.random() * 文案库.length);
             消息框.innerText = `${文案库[随机索引]}`;
@@ -278,37 +160,22 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             console.error('催更失败', error);
-            消息框.innerText = '墨尽，但江晏已知';
+            消息框.innerText = '江晏：（疑惑）踢空了？';
         }
     };
+})();
 
-    // ========== Artalk 初始化 ==========
-        setTimeout(() => {
-            artalkInstance = Artalk.init({
-                el: '#artalk-test',
-                server: 'https://artalkjs-production.up.railway.app',
-                site: '鱼鱼书阁测试',
-                pageKey: 'test-page',
-                pageTitle: '测试页面',
-                placeholder: '说点什么测试一下...',
+window.artalkInstance = Artalk.init({
+    el: '#artalk',
+    server: 'https://artalkjs-production.up.railway.app',
+    site: 'yysls-yanzhu-bg',
+    pageKey: 'index',
+                pageTitle: '与晏同归',
+                placeholder: '说点什么...',
                 login: true,  // 显示登录按钮！关键参数
                 darkMode: document.body.classList.contains('dark'),
-            });
-            console.log('Artalk 初始化完成，登录按钮已启用');
-            
-            // #标签高亮功能
-            setInterval(() => {
-                document.querySelectorAll('.artalk-content').forEach(el => {
-                    if (el.dataset.hashtagProcessed) return;
-                    
-                    const regex = /#([\w\u4e00-\u9fa5]+)/g;
-                    el.innerHTML = el.innerHTML.replace(regex, '<span class="hashtag" style="color: var(--button-bg); font-weight:500;">#$1</span>');
-                    el.dataset.hashtagProcessed = 'true';
-                });
-            }, 500);
-        }, 200);
-    
+    // ...其他配置
+});
     // 启动
     初始化();
-})();
 </script>
