@@ -601,6 +601,11 @@ body {
     float: none; 
 }
 
+.atk-comment>.atk-main {
+    display: block;
+    margin-left: 0px;
+}
+
 .atk-comment>.atk-main>.atk-body {
     font-size: 18px;  /* 放大字号 */
     line-height: 1.8;
