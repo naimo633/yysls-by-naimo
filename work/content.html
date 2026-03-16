@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>文章合集</title>
+    <!-- 引用同一目录下的 CSS 文件 -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="light">
+   <!-- 右上角工具栏 -->
+   <div class="top-bar">
+        <button class="top-btn" onclick="toggleTheme()"><img src="../setting/image/light.png"></button>
+        <button class="top-btn" onclick="scrollToTop()"><img src="../setting/image/top.png"></button>
+        <button class="top-btn" onclick="window.location.href='../index.html'"><img src="../setting/image/home.png" alt="首页"></button>
+    </div>     
+
+    <!-- 外层容器：负责宽度限制和内部排列 -->
+    <div class="outer-container">
+        <div class="pure-reader" >
+        <h1 class="article-title">文章专区</h1>
+        </div>
+        <div id="tab-author" class="tab-content active">
+            <div class="work-card">
+        <div class="work-cover"><img src="naimo-ljzm.png"></div>
+        <div class="work-info">
+            <h2 class="work-title">灵鲛织梦</h2>
+            <div class="work-meta">
+                <span class="work-author">奶沫</span>
+                <span class="work-divider">·</span>
+                <span class="work-wordcount">连载</span>
+                <span class="work-divider">·</span>
+                <span class="work-status">古代言情</span>
+            </div>
+            <p class="work-desc">
+                江晏，你能为心上人做到哪一步？
+            </p>
+            <div class="work-tags">
+                <span class="tag3">人外</span>
+                <span class="tag2">爱欲难分</span>
+                <span class="tag1">前世今生</span>
+                <span class="tag1">从初遇开始</span>
+                <span class="tag1">误会</span>
+            </div>
+            <div class="work-links">
+                <a href="./naimo/ljzm/ljzm-1.html" class="work-link">阅读</a>
+                <a href="#" class="work-link">评论</a>
+            </div>
+    </div>
+</div>
+        </div>
+        
+
+        </div>    
+    </div>
+</body>
+</html>
+
+<script>
+// ===== 回到顶部功能 =====
+function scrollToTop() {
+    window.scrollTo({
+        top: 200,
+        behavior: 'smooth'  // 平滑滚动
+    });
+}
+
+// ===== 切换主题功能 =====
+function toggleTheme() {
+    // 获取当前主题
+    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+    // 切换到相反的主题
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    // 更新 body 的 class
+    document.body.className = newTheme;
+    
+    // 保存到 localStorage
+    localStorage.setItem('theme', newTheme);
+    
+    // 更新按钮图标
+    const themeBtn = document.querySelector('.top-btn:first-child');
+    if (themeBtn) {
+        themeBtn.innerHTML = newTheme === 'light' ? '<img src="../setting/image/light.png">' 
+    : '<img src="../setting//image/dark.png">';
+    }
+    
+    // 同步 Artalk 主题（如果你有 artalkInstance）
+    if (window.artalkInstance) {
+        window.artalkInstance.setDarkMode(newTheme === 'dark');
+    }
+    
+    console.log('主题已切换为：', newTheme);
+}
+
+// ===== 页面加载时初始化主题 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 读取保存的主题，默认为浅色
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.className = savedTheme;
+    
+    // 初始化按钮图标
+    const themeBtn = document.querySelector('.top-btn:first-child');
+    if (themeBtn) {
+       themeBtn.innerHTML = newTheme === 'light' ? '<img src="../setting/image/light.png">' 
+    : '<img src="../setting/image/dark.png">';
+    }
+});
+
+function toggleCatalog(header) {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector('.catalog-icon');
+    
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.textContent = '▲';
+        header.classList.add('active');
+    } else {
+        content.style.display = 'none';
+        icon.textContent = '▼';
+        header.classList.remove('active');
+    }
+}
+
+
+</script>
