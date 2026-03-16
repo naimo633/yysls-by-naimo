@@ -630,8 +630,9 @@ body {
     gap: 18px;
 }
 
-.atk-comment>.atk-main>.atk-body>.p{
-    margin-bottom: 18px!important;
+.atk-content p {
+    margin-bottom: 1em !important;
+    margin-top: 0 !important;
 }
 
 /* ===== 深色模式适配 ===== */
