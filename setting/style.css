@@ -1,4 +1,4 @@
-/* ===== style.css - 毛玻璃阅读器样式 ===== */
+/* ===== style.css - 晏主bg粮仓样式 ===== */
 
 /* 重置默认边距 */
 * {
@@ -40,8 +40,6 @@ body.dark {
 
 /* 页面主体：背景图片 */
 body {
-    /* 背景图片 - 替换成你的图片链接 */
-    background-image: url('./image/background.png'); /* 示例图，请替换 */
     background-color: var(--bg);
     background-size: cover;
     background-position: top;
@@ -49,22 +47,28 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', '宋体', serif;
-    
     /* 让 body 作为网格容器，水平垂直居中 */
     display: grid;
     place-items: center;
 }
 
+.title-background {
+    /* 背景图片 - 替换成你的图片链接 */
+    background-image: url('./image/background.png'); /* 示例图，请替换 */
+    background-size: 100% auto;  /* 宽度100%，高度自动 */
+    background-repeat: no-repeat; /* 不重复 */
+    background-position: top center; /* 顶端居中 */
+}
 
-    .title-image {
-        content: var(--title-image); 
-        display: block;
-        width: 30%;
-        max-width: 400px;
-        min-width: 150px;
-        height: auto;
-        margin: 250px 0 0 0;
-        }
+.title-image {
+    content: var(--title-image); 
+    display: block;
+    width: 30%;
+    max-width: 400px;
+    min-width: 150px;
+    height: auto;
+    margin: 250px 0 0 0;
+    }
    
 /* ===== 左上角悬浮工具栏 ===== */
 .top-bar {
@@ -72,19 +76,19 @@ body {
     top: 20px;
     right: 20px;
     display: flex;
-    gap: 10px;
+    gap: 4px;
     z-index: 1000;
     background: var(--surface);
     padding: 8px 12px;
-    border-radius: 40px;
+    border-radius: 28px;
     border: 1px solid var(--border);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
 }
 
 .top-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: none;
     background: transparent;
     color: var(--text);
@@ -108,8 +112,8 @@ body {
 
 /* 主题主按钮（小月亮） */
 .theme-main-btn {
-    width: 48px;
-    height: 48px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--surface);
     border: 2px solid var(--border);
@@ -118,7 +122,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 16px;
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -219,30 +223,13 @@ body {
 
 /* 外层容器：限制最大宽度，同时保持居中 */
 .outer-container {
-    background-color: var(--background);
-    backdrop-filter: blur(12px);             /* 毛玻璃模糊程度 */
-    -webkit-backdrop-filter: blur(12px);
-    padding: 110px 35px 0px 35px;
+    padding: 0px 35px 0px 35px;
     max-width: 800px;  /* 电脑上阅读宽度，可调整 */
     width: 100%;   
-    /* 让容器撑满高度，但不影响在 body 中的居中 */
     min-height: 100vh;
     line-height: 1.8;
     display: flex;
     flex-direction: column;
-    overflow: hidden; 
-}
-
-
-/* 阅读器卡片：毛玻璃效果 */
-.reader {
-    /* 卡片内部内容从上到下排列 */
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: auto; 
-    min-height: 500px; 
-    width: 100%;
 }
 
 /* 文章标题 */
@@ -257,7 +244,7 @@ body {
 /* 元信息 */
 .article-meta {
     color: var(--text-meta);
-    margin-left: 2em;
+    margin-left: 1em;
     margin-bottom: 20px;
     font-size: 1em;
 }
@@ -274,7 +261,7 @@ body {
 .cuigeng-left {
     display: flex;
     align-items: center;
-    margin-left: 0.8em;  /* 抵消外层可能的边距，可根据需要调整 */
+    margin-left: 0;  /* 抵消外层可能的边距，可根据需要调整 */
 }
 
 /* 计数数字容器 */
@@ -316,6 +303,15 @@ body {
 
 .cuigeng-btn:hover {
     background: var(--button-hover);
+}
+
+.randomMessage {
+    font-size: 0.9em;
+    color: var(--text-meta);
+    text-align: center;
+    margin-bottom: 1em;
+    min-height: 20px;
+    white-space: nowrap;
 }
 
 /* ===== 选项卡样式 ===== */
@@ -472,9 +468,10 @@ body {
     border-color: var(--text-light);
 }
 
-/* ===== Artalk 评论区样式适配毛玻璃 ===== */
-#artalk-test {
-    margin-top: 40px;
+/* ===== Artalk 评论区样式 ===== */
+#artalk {
+    margin-top: 24px;
+    padding: 0 1em;
 }
 
 /* 评论区整体容器 */
@@ -488,23 +485,13 @@ body {
 
 /* 评论输入框容器 */
 .artalk-editor {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 16px !important;
-    padding: 16px !important;
     margin-bottom: 20px !important;
 }
 
 /* 输入框本身 */
 .artalk-editor textarea,
 .artalk-editor input {
-    background: rgba(0, 0, 0, 0.2) !important;  /* 半透明深色底，让文字更清晰 */
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
     color: var(--text) !important;
-    padding: 10px !important;
     font-size: 1em !important;
 }
 
@@ -614,7 +601,192 @@ body {
     background: var(--button-hover) !important;
 }
 
+/* 折叠目录样式 */
+.work-catalog {
+    margin-top: 15px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-top: 10px;
+}
 
+.catalog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--text-light);
+    font-size: 0.95em;
+    transition: 0.2s;
+}
+
+.catalog-header:hover {
+    color: var(--button-bg);
+}
+
+.catalog-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+
+.catalog-header.active .catalog-icon {
+    transform: rotate(180deg);
+}
+
+.catalog-content {
+    padding: 12px 0 5px 0;
+}
+
+.catalog-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.chapter-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.chapter-item:last-child {
+    border-bottom: none;
+}
+
+.chapter-link-block {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.chapter-link-block:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.chapter-title {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+}
+
+.chapter-desc {
+    display: block;
+    font-size: 0.9em;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.chapter-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chapter-tags .tag {
+    background: var(--button-bg);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 30px;
+    font-size: 0.75em;
+    opacity: 0.9;
+}
+
+/* ===== 纯净阅读器样式（新增）===== */
+.pure-reader {
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+.pure-reader .article-title {
+    font-size: 2.4em;
+    font-weight: 700;
+    color: var(--text);
+    margin: 72px 0 15px 0;
+    letter-spacing: 1px;
+    line-height: 1.3;
+}
+
+.pure-reader .article-author {
+    color: var(--text-light);
+    font-size: 1em;
+    margin-bottom: 8px;
+}
+
+.pure-reader .article-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.pure-reader .article-tags .tag1 {
+    background: #d2e4cf;
+    color: #4a6b60;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.pure-reader .article-tags .tag2 {
+    background: #e9ebd3;
+    color: #867a34;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.pure-reader .article-tags .tag3 {
+    background: #fccfbd;
+    color: #9b3030;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.pure-reader .article-content p {
+    margin-bottom: 1em;
+    text-indent: 2em;
+    font-size: 1.1em;
+    line-height: 1.8em;
+    color: var(--text);
+}
+
+.chapter-nav {
+    margin: 50px 0 50px 0;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+}
+
+.chapter-nav a {
+    color: var(--button-bg);
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 5px 0;
+    border-bottom: 1px solid transparent;
+}
+
+.chapter-nav a:hover {
+    color: var(--button-hover);
+    border-bottom-color: var(--button-hover);
+}
+
+.chapter-nav .catalog-link {
+    color: var(--button-bg);
+    font-size: 0.95em;
+}
 
 
 /* 手机端适配 */
@@ -642,14 +814,6 @@ body {
     margin-bottom: 1.5em;
     text-indent: 2em;
     color: var(--text);
-}
-
-/* 对话标签 */
-.text-tag {
-    font-weight: 600;
-    color: var(--text-tag);
-    margin-right: 8px;
-    font-size: 1.2em;
 }
 
 /* 手机屏幕优化：完全撑满，不留空隙 */
