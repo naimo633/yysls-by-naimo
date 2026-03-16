@@ -588,7 +588,7 @@ body {
 /* ===== 一级评论上下布局（原生适配）===== */
 
 /* 一级评论容器 */
-.artalk>.atk-comment {
+.atk-comment {
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
@@ -599,12 +599,14 @@ body {
     display: block;
     padding: 0;
     float: none; 
+    width: 0;
 }
 
 .atk-comment>.atk-main {
     display: block;
-    margin-left: 0px;
+    margin-left: 0px !important; 
 }
+
 
 .atk-comment>.atk-main>.atk-body {
     font-size: 18px;  /* 放大字号 */
@@ -618,49 +620,6 @@ body {
 
 .atk-comment>.atk-main>.atk-body>.p{
     margin-bottom: 18px!important;
-}
-
-/* ===== 二级回复样式 ===== */
-.artalk .atk-comment .atk-reply {
-    margin: 15px 0 15px 20px !important;
-    padding: 15px !important;
-    border-left: 2px solid var(--border);
-}
-
-/* 二级回复的内容 */
-.artalk .atk-comment .atk-reply .atk-content {
-    font-size: 16px !important;
-}
-
-.artalk-editor .atk-editor-info {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-    flex-wrap: wrap;
-}
-
-.artalk-editor .atk-editor-info input {
-    flex: 1;
-    min-width: 120px;
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    font-size: 1em;
-}
-
-.artalk-editor .atk-editor-submit {
-    background: var(--button-bg, #1d8ae4);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 40px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.artalk-editor .atk-editor-submit:hover {
-    background: var(--button-hover, #63b6f1);
 }
 
 /* ===== 深色模式适配 ===== */
