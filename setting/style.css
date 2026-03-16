@@ -563,6 +563,10 @@ body {
     --at-color-gradient: linear-gradient(180deg, transparent, var(--bg));
 }
 
+.atk-main-editor>.atk-textarea-wrap>.atk-textarea {
+    background-color: var(--bg);
+}
+
 .atk-main-editor>.atk-bottom {
     display: flex;
     flex-direction: row;
