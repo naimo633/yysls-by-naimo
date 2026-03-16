@@ -588,7 +588,8 @@ body {
 .artalk>.atk-list {
     position: relative;
     background: var(--bg);
-    padding: 1em;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 /* ===== 一级评论上下布局（原生适配）===== */
