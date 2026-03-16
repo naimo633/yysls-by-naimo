@@ -54,7 +54,7 @@ body {
 
 .title-background {
     /* 背景图片 - 替换成你的图片链接 */
-    background-image: url('./image/background.png'); /* 示例图，请替换 */
+    background-image: url('https://picui.ogmua.cn/s1/2026/03/16/69b8096fe5757.webp'); /* 示例图，请替换 */
     background-size: 100% auto;  /* 宽度100%，高度自动 */
     background-repeat: no-repeat; /* 不重复 */
     background-position: top center; /* 顶端居中 */
@@ -561,6 +561,42 @@ body {
     border-radius: 30px;
     font-size: 0.75em;
     opacity: 0.9;
+}
+
+/* 一级评论 - 内容放在头像下方 */
+.artalk-comment-item:not(.is-reply) {
+    display: flex;
+    flex-direction: column;  /* 改为纵向排列 */
+    gap: 10px;
+}
+
+/* 一级评论的头像和元信息放在顶部一行 */
+.artalk-comment-item:not(.is-reply) .atk-comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* 一级评论的头像 */
+.artalk-comment-item:not(.is-reply) .atk-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* 一级评论的内容 - 取消缩进，放在头像下方 */
+.artalk-comment-item:not(.is-reply) .atk-comment-content {
+    margin-left: 0;           /* 取消左侧缩进 */
+    padding-left: 0;           /* 取消左侧内边距 */
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* 一级评论的回复按钮等操作 */
+.artalk-comment-item:not(.is-reply) .atk-comment-actions {
+    margin-left: 0;
+    padding-left: 0;
 }
 
 /* ===== 纯净阅读器样式（新增）===== */
