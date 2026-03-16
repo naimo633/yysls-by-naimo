@@ -51,15 +51,10 @@ body.dark {
 /* 页面主体：背景图片 */
 body {
     background-color: var(--bg);
-    background-image: url('https://picui.ogmua.cn/s1/2026/03/16/69b8096fe5757.webp'); /* 示例图，请替换 */
+    background-image: url('https://picui.ogmua.cn/s1/2026/03/17/69b87159acd01.webp'); /* 示例图，请替换 */
     background-size: 100% auto;  /* 宽度100%，高度自动 */
     background-repeat: no-repeat; /* 不重复 */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background-size: cover;
-    background-position: center;
-    background-size: cover;
-    background-position: top;
+    background-position: top center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     min-height: 100vh;
