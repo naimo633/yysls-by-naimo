@@ -75,8 +75,8 @@ function toggleTheme() {
     // 更新按钮图标
     const themeBtn = document.querySelector('.top-btn:first-child');
     if (themeBtn) {
-        themeBtn.innerHTML = newTheme === 'light' ? '<img src="./image/light.png">' 
-    : '<img src="./image/dark.png">';
+        themeBtn.innerHTML = newTheme === 'light' ? '<img src="./setting/image/light.png">' 
+    : '<img src="./setting/image/dark.png">';
     }
     
     // 同步 Artalk 主题（如果你有 artalkInstance）
@@ -172,33 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
 
-</div>
-
-</body>
-</html>
-
-<script>
-
-// ===== 新增：Artalk 初始化 =====
-document.addEventListener('DOMContentLoaded', function() {
-    // 如果已经有实例，先销毁
-    if (window.artalkInstance) {
-        window.artalkInstance.destroy();
-    }
-    
-    window.artalkInstance = Artalk.init({
-        el: '#artalk-comments',
-        server: 'https://artalkjs-production.up.railway.app',
-        site: 'yanzhu-bg',  // 确认你的后台站点名
-        pageKey: 'home',
-        pageTitle: 'index',
-        placeholder: '说点什么...',
-        login: true,
-        darkMode: document.body.classList.contains('dark'),
-    });
-});
-</script>
-
 <script>
 // ===== Tag 高亮功能 =====
 function highlightHashtags() {
@@ -224,5 +197,32 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(highlightHashtags, 1000);
     // 然后每秒检查一次新评论
     setInterval(highlightHashtags, 2000);
+});
+</script>
+
+</div>
+
+</body>
+</html>
+
+<script>
+
+// ===== 新增：Artalk 初始化 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 如果已经有实例，先销毁
+    if (window.artalkInstance) {
+        window.artalkInstance.destroy();
+    }
+    
+    window.artalkInstance = Artalk.init({
+        el: '#artalk-comments',
+        server: 'https://artalkjs-production.up.railway.app',
+        site: 'yanzhu-bg',  // 确认你的后台站点名
+        pageKey: 'home',
+        pageTitle: 'index',
+        placeholder: '说点什么...',
+        login: true,
+        darkMode: document.body.classList.contains('dark'),
+    });
 });
 </script>
