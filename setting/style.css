@@ -571,7 +571,6 @@ body {
     padding: 8px 0;
     flex-wrap: wrap;
 }
-
 .atk-main-editor>.atk-bottom .atk-send-btn {
     background: var(--at-color-main);
     color: #fff;
@@ -594,6 +593,12 @@ body {
     display: flex;
     flex-direction: column;
     padding: 0px;
+}
+
+.atk-comment>.atk-avatar {
+    display: block;
+    padding: 0;
+    float: none; 
 }
 
 .atk-comment>.atk-main>.atk-body {
