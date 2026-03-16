@@ -38,7 +38,7 @@
             <!-- 右侧：催更按钮 -->
             <div class="cuigeng-right">
                 <button class="cuigeng-btn" onclick="handleAnonymousKick()">催 更</button>
-                <button class="read-btn" onclick="window.location.href='./work/content.html'">看 文</button>
+                <!-- <button class="read-btn" onclick="window.location.href='./work/content.html'">看 文</button> -->
             </div>
         </div>
    
@@ -196,5 +196,33 @@ document.addEventListener('DOMContentLoaded', function() {
         login: true,
         darkMode: document.body.classList.contains('dark'),
     });
+});
+</script>
+
+<script>
+// ===== Tag 高亮功能 =====
+function highlightHashtags() {
+    // 找到所有评论内容里的元素
+    document.querySelectorAll('.artalk-content').forEach(el => {
+        // 如果已经处理过就跳过
+        if (el.dataset.hashtagProcessed) return;
+        
+        // 匹配 #开头的中文、英文、数字，直到遇到空格或标点
+        const regex = /#([\w\u4e00-\u9fa5]+)/g;
+        
+        // 把 #文字 替换成带 span 的版本
+        el.innerHTML = el.innerHTML.replace(regex, '<span class="hashtag">#$1</span>');
+        
+        // 标记已处理
+        el.dataset.hashtagProcessed = 'true';
+    });
+}
+
+// 在页面加载完成后启动监听
+document.addEventListener('DOMContentLoaded', function() {
+    // 先执行一次
+    setTimeout(highlightHashtags, 1000);
+    // 然后每秒检查一次新评论
+    setInterval(highlightHashtags, 2000);
 });
 </script>
