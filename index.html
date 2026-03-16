@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>与晏同归-晏主BG同人交流站</title>
     <!-- 引用同一目录下的 CSS 文件 -->
-    <link rel="stylesheet" href="setting/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.css">
 </head>
+    <link rel="stylesheet" href="style.css">
+    
 
 <body class="light">
    <!-- 右上角工具栏 -->
    <div class="top-bar">
         <button class="top-btn" onclick="toggleTheme()"><img src="./setting/image/light.png"></button>
         <button class="top-btn" onclick="scrollToTop()"><img src="./setting/image/top.png"></button>
-        <button class="top-btn" onclick="window.location.href='./work/content.html'"><img src="./setting/image/content.png" alt="文章列表"></button>
+        <button class="top-btn" onclick="window.location.href='./work/content.html'"><img src="./setting/image/content.png" alt="看文"></button>
     </div>     
 
     <!-- 外层容器：负责宽度限制和内部排列 -->
@@ -22,7 +24,7 @@
             <img class="title-image" src="" alt="与晏同归">
             <div class="article-meta">
                 <p>江晏×少东家</p>
-                <p>燕云十六声-无盈利同人交流站</p>
+                <p>燕云十六声-无盈利同人交流网站</p>
             </div>
         </div>
         <!-- 催更栏 -->
@@ -36,16 +38,18 @@
             <!-- 右侧：催更按钮 -->
             <div class="cuigeng-right">
                 <button class="cuigeng-btn" onclick="handleAnonymousKick()">催 更</button>
+                <button class="read-btn" onclick="window.location.href='./work/content.html'">看 文</button>
             </div>
         </div>
+   
         <div id="randomMessage" class="randomMessage">
                 来踢一脚吧，没有催更铲不动惹T^T
         </div>
-        <div id="artalk">
-            <!-- Artalk JS -->
-            <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
-        </div>
-    </div>
+
+        <!-- 评论区容器 -->
+        <div id="artalk-comments" style="margin-top: 20px;"></div>
+        <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
+
 <script>
 // ===== 回到顶部功能 =====
 function scrollToTop() {
@@ -162,19 +166,35 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 })();
 
-window.artalkInstance = Artalk.init({
-    el: '#artalk',
-    server: 'https://artalkjs-production.up.railway.app',
-    site: 'yysls-yanzhu-bg',
-    pageKey: 'index',
-                pageTitle: '与晏同归',
-                placeholder: '说点什么...',
-                login: true,  // 显示登录按钮！关键参数
-                darkMode: document.body.classList.contains('dark'),
-    // ...其他配置
-});
     // 启动
     初始化();
 </script>
-    </body>
+
+<script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
+
+</div>
+
+</body>
 </html>
+
+<script>
+
+// ===== 新增：Artalk 初始化 =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 如果已经有实例，先销毁
+    if (window.artalkInstance) {
+        window.artalkInstance.destroy();
+    }
+    
+    window.artalkInstance = Artalk.init({
+        el: '#artalk-comments',
+        server: 'https://artalkjs-production.up.railway.app',
+        site: 'yanzhu-bg',  // 确认你的后台站点名
+        pageKey: 'home',
+        pageTitle: 'index',
+        placeholder: '说点什么...',
+        login: true,
+        darkMode: document.body.classList.contains('dark'),
+    });
+});
+</script>
