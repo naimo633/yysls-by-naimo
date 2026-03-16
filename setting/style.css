@@ -585,6 +585,11 @@ body {
     border-radius: 4px;
 }
 
+.artalk>.atk-list {
+    position: relative;
+    background: var(--bg);
+}
+
 /* ===== 一级评论上下布局（原生适配）===== */
 
 /* 一级评论容器 */
