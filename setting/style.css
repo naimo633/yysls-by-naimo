@@ -510,6 +510,10 @@ body {
     margin-top: 40px;
     width: 100%;
     font-family: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', serif;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
 }
 
 /* ===== 输入框样式 ===== */
@@ -867,6 +871,63 @@ body.dark .artalk-editor .atk-editor-info input {
     color: var(--button-bg);
     font-size: 0.95em;
 }
+
+/* ===== 毛玻璃图片效果 ===== */
+.glass-image {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.glass-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: all 0.5s ease;
+    /* 毛玻璃效果 */
+    filter: blur(8px) brightness(0.9);
+    -webkit-filter: blur(8px) brightness(0.9);
+    /* 增加一点灰度，让毛玻璃感更强 */
+    filter: blur(8px) brightness(0.9) grayscale(30%);
+    -webkit-filter: blur(8px) brightness(0.9) grayscale(30%);
+}
+
+/* 鼠标悬停变清晰（PC端） */
+.glass-image:hover img {
+    filter: blur(0) brightness(1) grayscale(0);
+    -webkit-filter: blur(0) brightness(1) grayscale(0);
+}
+
+/* 长按变清晰（移动端） */
+.glass-image:active img {
+    filter: blur(0) brightness(1) grayscale(0);
+    -webkit-filter: blur(0) brightness(1) grayscale(0);
+    transform: scale(1.02);  /* 轻微放大效果，更有交互感 */
+    transition: all 0.2s ease;
+}
+
+/* 可选：添加提示文字 */
+.glass-image::after {
+    content: "👆 长按看清";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    backdrop-filter: blur(4px);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    pointer-events: none;  /* 让提示不阻挡点击 */
+}
+
+.glass-image:hover::after,
+.glass-image:active::after {
+    opacity: 0;  /* 清晰时隐藏提示 */
+}
+
 
 
 /* 手机端适配 */
