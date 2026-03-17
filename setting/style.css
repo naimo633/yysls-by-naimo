@@ -617,7 +617,6 @@ body {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
     -ms-user-select: none !important;
-    -webkit-touch-callout: none !important;
 }
 
 .atk-comment>.atk-avatar {
@@ -650,9 +649,6 @@ body {
 }
 
 .atk-comment-children>.atk-comment-wrap {
-    margin-top: 10px;
-    border-left: 1px dashed transparent;
-    border-bottom-color: transparent;
     padding-left: 1em;
     border-left: 2px solid var(--border);
 }
