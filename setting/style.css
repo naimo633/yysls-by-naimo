@@ -449,9 +449,12 @@ body {
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 8px;
+    display: flex;    
 }
 
 .work-tags .tag1 {
+    display: inline-block;
+    white-space: nowrap;  
     background: #d2e4cf;
     color: #4a6b60;
     padding: 4px 12px;
@@ -461,6 +464,8 @@ body {
 }
 
 .work-tags .tag3 {
+    display: inline-block;
+    white-space: nowrap;  
     background: #fccfbd;
     color: #9b3030;
     padding: 4px 12px;
@@ -470,6 +475,8 @@ body {
 }
 
 .work-tags .tag2 {
+    display: inline-block;
+    white-space: nowrap;  
     background: #e9ebd3;
     color: #867a34;
     padding: 4px 12px;
