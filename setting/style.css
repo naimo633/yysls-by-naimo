@@ -527,7 +527,7 @@ body {
 .atk-main-editor {
     background: var(--background);
     border-radius: 0px;
-    padding: 8px;
+    padding: 0.5em 1em;;
     margin-bottom: 8px;
     border: 0;
 }
