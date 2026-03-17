@@ -650,7 +650,7 @@ body {
 }
 
 .atk-comment>.atk-main>.atk-body>.atk-collapsed {
-    background: var(--bg); 
+    background-color: var(--card-background); 
     border-radius: 4px;
 }
 
