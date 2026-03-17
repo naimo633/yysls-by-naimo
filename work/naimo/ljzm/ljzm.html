@@ -221,22 +221,23 @@
         });
 
     // 初始化评论区
-    function initArtalk() {
-        // 如果已经有实例，先销毁
-        if (window.artalkInstance) {
-            window.artalkInstance.destroy();
-        }      
-        // 初始化 Artalk
-        window.artalkInstance = Artalk.init({
-            el: '#artalk-comments',           // 容器元素
-            pageKey: 'ljzm',      // 页面唯一标识
-            pageTitle: '灵鲛织梦', // 页面标题
-            server: 'https://artalkjs-production.up.railway.app', // 你的 Artalk 服务器
-            site: 'yanzhu-ljzm',        // 你的站点名
-            placeholder: '冒个泡泡...',
-            darkMode: document.body.classList.contains('dark'),
-        });
-    }    
+    document.addEventListener('DOMContentLoaded', function() {
+    // 如果已经有实例，先销毁
+    if (window.artalkInstance) {
+        window.artalkInstance.destroy();
+    }
+    
+    window.artalkInstance = Artalk.init({
+        el: '#artalk-comments',
+        server: 'https://artalkjs-production.up.railway.app',
+        site: 'yanzhu-ljzm',  // 确认你的后台站点名
+        pageKey: 'ljzm',
+        pageTitle: '灵鲛织梦',
+        placeholder: '冒个泡泡...',
+        login: true,
+        darkMode: document.body.classList.contains('dark'),
+    });
+});
     </script>  
 </body>
 </html>
