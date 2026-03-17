@@ -31,6 +31,9 @@
     <div class="outer-container">
         <div class="pure-reader" id="articleContainer">
             <div class="loading">加载文章中...</div>
+            <!-- Artalk 评论区容器 -->
+            <div id="artalk-comments" class="comment-section"></div>
+            <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
         </div>
     </div>
 
@@ -210,13 +213,30 @@
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
-        
 
         // 监听浏览器后退/前进
         window.addEventListener('popstate', function() {
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
-    </script>
+
+    // 初始化评论区
+    function initArtalk() {
+        // 如果已经有实例，先销毁
+        if (window.artalkInstance) {
+            window.artalkInstance.destroy();
+        }      
+        // 初始化 Artalk
+        window.artalkInstance = Artalk.init({
+            el: '#artalk-comments',           // 容器元素
+            pageKey: 'ljzm',      // 页面唯一标识
+            pageTitle: '灵鲛织梦', // 页面标题
+            server: 'https://artalkjs-production.up.railway.app', // 你的 Artalk 服务器
+            site: 'yanzhu-ljzm',        // 你的站点名
+            placeholder: '冒个泡泡...',
+            darkMode: document.body.classList.contains('dark'),
+        });
+    }    
+    </script>  
 </body>
 </html>
