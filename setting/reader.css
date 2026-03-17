@@ -1,0 +1,155 @@
+.catalog-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--card-background);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .catalog-modal.show {
+            display: flex;
+        }
+        
+        .catalog-panel {
+            background: var(--card-background);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            width: 80%;
+            max-width: 400px;
+            max-height: 70vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .catalog-panel h3 {
+            color: var(--text);
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.4em;
+        }
+        
+        .catalog-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .catalog-list li {
+            margin-bottom: 10px;
+        }
+        
+        .catalog-list a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: var(--background);
+            border: 1px solid transparent;
+        }
+        
+        .catalog-list a:hover {
+            background: var(--button-bg);
+            color: white;
+            transform: translateX(5px);
+            border-color: var(--button-bg);
+        }
+        
+        .catalog-list a.current {
+            background: var(--button-bg);
+            color: white;
+            border-color: var(--button-bg);
+            font-weight: 500;
+        }
+        
+        .close-modal {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: var(--button-bg);
+            color: white;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+        .chapter-nav {
+    margin: 50px 0 50px 0;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;  /* 确保占满容器宽度 */
+}
+
+/* 三个子项都平均分宽度 */
+.chapter-nav .prev-chapter,
+.chapter-nav .catalog-link,
+.chapter-nav .next-chapter {
+    flex: 1;  /* 三等分关键！ */
+    text-align: center;
+    margin: 0;
+    min-width: 0;  /* 防止内容溢出 */
+}
+
+/* 左边左对齐，右边右对齐 */
+.chapter-nav .prev-chapter {
+    text-align: left;
+}
+
+.chapter-nav .next-chapter {
+    text-align: right;
+}
+
+/* 链接样式保持不变 */
+.chapter-nav a {
+    color: var(--button-bg);
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 5px 0;
+    border-bottom: 1px solid transparent;
+    display: inline-block;
+}
+
+.chapter-nav a:hover {
+    color: var(--button-hover);
+    border-bottom-color: var(--button-hover);
+}
+
+/* 没有链接时显示占位符 */
+.chapter-nav .prev-chapter:empty::before,
+.chapter-nav .next-chapter:empty::before {
+    content: "—";
+    color: var(--text-light);
+    opacity: 0.3;
+}
+
+.pure-reader .article-content p {
+    text-indent: 2em;
+}
