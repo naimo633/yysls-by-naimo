@@ -151,7 +151,9 @@
 }
 
 .pure-reader .article-content p {
+    font-size: 18px;
     text-indent: 2em;
+    line-height: 1.8em;
     user-select: none;
     -webkit-user-select: none;  /* Chrome/Safari */
     -moz-user-select: none;     /* Firefox */
