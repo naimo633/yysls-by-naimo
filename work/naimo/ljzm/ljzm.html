@@ -36,17 +36,15 @@
         <div id="artalk-comments" class="comment-section"></div>
         <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script>
     </div>
+</body>
+</html>
 
-    <script>
+<script>
         // ===== 章节目录配置（写死在HTML里） =====
         const chapters = [
-            { id: 'ljzm-1', title: '1 送子观音陈子奚', file: 'articles/ljzm-1.txt' },
-            { id: 'ljzm-2', title: '2 没品的姑娘', file: 'articles/ljzm-2.txt' },
-            { id: 'ljzm-3', title: '3 长得像盘菜', file: 'articles/ljzm-3.txt' },
-            { id: 'ljzm-4', title: '4 鲛的身材很曼妙', file: 'articles/ljzm-4.txt' },
-            { id: 'ljzm-5', title: '5 我卖鱼养你', file: 'articles/ljzm-5.txt' },
-            { id: 'ljzm-6', title: '6 破坏性极强', file: 'articles/ljzm-6.txt' },
-            { id: 'ljzm-7', title: '7 清白被拍碎', file: 'articles/ljzm-7.txt' }
+            { id: 'ljzm-1', title: '第一章 送子观音陈子奚', file: 'articles/ljzm-1.txt' },
+            { id: 'ljzm-2', title: '第二章 你要找什么东西', file: 'articles/ljzm-2.txt' },
+            { id: 'ljzm-3', title: '第三章 后续章节名', file: 'articles/ljzm-3.txt' }
         ];
         
         let currentChapterIndex = 0; // 当前章节索引
@@ -213,30 +211,53 @@
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
+        
 
         // 监听浏览器后退/前进
         window.addEventListener('popstate', function() {
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
+
     // 初始化评论区
-    document.addEventListener('DOMContentLoaded', function() {
-    // 如果已经有实例，先销毁
-    if (window.artalkInstance) {
-        window.artalkInstance.destroy();
+    function initArtalk() {
+        // 如果已经有实例，先销毁
+        if (window.artalkInstance) {
+            window.artalkInstance.destroy();
+        }
+        
+        // 获取当前章节信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapterId = urlParams.get('chapter') || 'ljzm-1';
+        const currentChapter = chapters.find(ch => ch.id === chapterId);
+        
+        // 初始化 Artalk
+        window.artalkInstance = Artalk.init({
+            el: '#artalk-comments',           // 容器元素
+            pageKey: 'ljzm',      // 页面唯一标识
+            pageTitle: '灵鲛织梦', // 页面标题
+            server: 'https://artalkjs-production.up.railway.app', // 你的 Artalk 服务器
+            site: 'yanzhu-ljzm',        // 你的站点名
+            placeholder: '冒个泡泡...',
+            darkMode: document.body.classList.contains('dark'),
+        });
     }
     
-    window.artalkInstance = Artalk.init({
-        el: '#artalk-comments',
-        server: 'https://artalkjs-production.up.railway.app',
-        site: 'yanzhu-ljzm',  // 确认你的后台站点名
-        pageKey: 'ljzm',
-        pageTitle: '灵鲛织梦',
-        placeholder: '冒个泡泡...',
-        login: true,
-        darkMode: document.body.classList.contains('dark'),
-    });
-});     
-</script>  
-</body>
-</html>
+    // 在加载文章后重新初始化评论区
+    async function loadChapter(chapterId) {
+        // ... 你原有的加载文章代码 ...
+        
+        // 加载完文章后，重新初始化评论区
+        setTimeout(() => {
+            initArtalk();
+        }, 100);
+    }
+    
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... 你原有的初始化代码 ...
+        
+        // 初始化评论区
+        setTimeout(initArtalk, 200);
+    })
+    </script>
