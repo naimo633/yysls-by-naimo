@@ -634,6 +634,14 @@ body {
     margin-top: 0 !important;
 }
 
+.atk-comment-children>.atk-comment-wrap {
+    margin-top: 10px;
+    border-left: 1px dashed transparent;
+    border-bottom-color: transparent;
+    padding-left: 1em;
+    border-left: 2px solid var(--border);
+}
+
 /* Tag 样式 */
 .hashtag {
     color: var(--text-tag);           /* 你的蓝色 */
