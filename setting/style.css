@@ -612,6 +612,14 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
+.atk-comment>.img {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
 .atk-comment>.atk-avatar {
     display: block;
     padding: 0;
