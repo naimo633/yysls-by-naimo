@@ -219,14 +219,13 @@
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
+     </script>  
+</body>
+</html>
 
+<script>  
     // 初始化评论区
     document.addEventListener('DOMContentLoaded', function() {
-    // 如果已经有实例，先销毁
-    if (window.artalkInstance) {
-        window.artalkInstance.destroy();
-    }
-    
     window.artalkInstance = Artalk.init({
         el: '#artalk-comments',
         server: 'https://artalkjs-production.up.railway.app',
@@ -237,7 +236,4 @@
         login: true,
         darkMode: document.body.classList.contains('dark'),
     });
-});
     </script>  
-</body>
-</html>
