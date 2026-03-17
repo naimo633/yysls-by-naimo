@@ -37,10 +37,7 @@
         <div id="artalk-comments" class="comment-section"></div>
         <script src="https://cdn.jsdelivr.net/npm/artalk@2/dist/Artalk.js"></script> -->
     </div>
-</body>
-</html>
-
-<script>
+    <script>
         // ===== 章节目录配置（写死在HTML里） =====
         const chapters = [
             { id: 'ljzm-1', title: '第一章 送子观音陈子奚', file: 'articles/ljzm-1.txt' },
@@ -219,18 +216,16 @@
             const chapterId = getChapterFromUrl();
             loadChapter(chapterId);
         });
-
+    </script>    
+</body>
+</html>
+<script>
     // 初始化评论区
     function initArtalk() {
         // 如果已经有实例，先销毁
         if (window.artalkInstance) {
             window.artalkInstance.destroy();
         }
-        
-        // 获取当前章节信息
-        const urlParams = new URLSearchParams(window.location.search);
-        const chapterId = urlParams.get('chapter') || 'ljzm-1';
-        const currentChapter = chapters.find(ch => ch.id === chapterId);
         
         // 初始化 Artalk
         window.artalkInstance = Artalk.init({
@@ -243,22 +238,5 @@
             darkMode: document.body.classList.contains('dark'),
         });
     }
-    
-    // 在加载文章后重新初始化评论区
-    async function loadChapter(chapterId) {
-        // ... 你原有的加载文章代码 ...
-        
-        // 加载完文章后，重新初始化评论区
-        setTimeout(() => {
-            initArtalk();
-        }, 100);
-    }
-    
-    // 页面加载时初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        // ... 你原有的初始化代码 ...
-        
-        // 初始化评论区
-        setTimeout(initArtalk, 200);
     })
-    </script>
+</script>
