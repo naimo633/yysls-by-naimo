@@ -804,6 +804,11 @@ body.dark .artalk-editor .atk-editor-info input {
     opacity: 0.9;
 }
 
+.hashtag {
+    color: var(--text-tag);
+    font-size: 0.9em;
+}
+
 /* ===== 纯净阅读器样式（新增）===== */
 .pure-reader {
     max-width: 750px;
