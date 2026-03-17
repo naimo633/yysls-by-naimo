@@ -649,6 +649,16 @@ body {
     border-left: 2px solid var(--border);
 }
 
+.atk-comment>.atk-main>.atk-body>.atk-collapsed {
+    background: var(--bg); 
+    border-radius: 4px;
+}
+
+.atk-comment>.atk-main>.atk-body>.atk-content.atk-type-collapsed {
+    border: none;
+    margin-bottom: -5px;
+}
+
 /* Tag 样式 */
 .hashtag {
     color: var(--text-tag);           /* 你的蓝色 */
@@ -899,12 +909,7 @@ body.dark .artalk-editor .atk-editor-info input {
     width: 100%;
     height: auto;
     transition: all 0.5s ease;
-    /* 毛玻璃效果 */
-    filter: blur(8px) brightness(0.9);
-    -webkit-filter: blur(8px) brightness(0.9);
-    /* 增加一点灰度，让毛玻璃感更强 */
-    filter: blur(8px) brightness(0.9) grayscale(30%);
-    -webkit-filter: blur(8px) brightness(0.9) grayscale(30%);
+    background: rgba(255, 255, 255, 0.2);  /* 保留透明背景 */
 }
 
 /* 鼠标悬停变清晰（PC端） */
@@ -917,33 +922,31 @@ body.dark .artalk-editor .atk-editor-info input {
 .glass-image:active img {
     filter: blur(0) brightness(1) grayscale(0);
     -webkit-filter: blur(0) brightness(1) grayscale(0);
-    transform: scale(1.02);  /* 轻微放大效果，更有交互感 */
+    transform: scale(1.02);
     transition: all 0.2s ease;
 }
 
-/* 可选：添加提示文字 */
+/* 提示文字 */
 .glass-image::after {
-    content: "👆 长按看清";
+    content: "长按查看";
     position: absolute;
     bottom: 10px;
     right: 10px;
     background: rgba(0, 0, 0, 0.6);
-    color: white;
+    color: var(--text);
     padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 500;
     backdrop-filter: blur(4px);
     opacity: 0.8;
-    transition: opacity 0.3s;
-    pointer-events: none;  /* 让提示不阻挡点击 */
+    transition: opacity 0.5s;
+    pointer-events: none;
 }
 
 .glass-image:hover::after,
 .glass-image:active::after {
-    opacity: 0;  /* 清晰时隐藏提示 */
+    opacity: 0;
 }
-
-
 
 /* 手机端适配 */
 @media (max-width: 600px) {
