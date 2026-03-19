@@ -1,0 +1,137 @@
+/* ===== 作品卡片样式 ===== */
+.work-card {
+    background: var(--card-background);
+    display: flex;
+    backdrop-filter: none;
+    gap: 25px;
+    padding: 1.5em 5%;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.5s;
+}
+
+.work-card:last-child {
+    border-bottom: none;
+}
+
+.work-card:hover {
+    background: var(--bg);
+}
+
+.work-cover {
+    font-size: 3.5em;
+    min-width: 80px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 16px;
+    border: none;
+}
+
+.work-info {
+    flex: 1;
+    gap: 1em;
+}
+
+.work-title {
+    font-size: 1.5em;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.work-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    flex-wrap: wrap;
+}
+
+.work-author {
+    font-weight: 500;
+    color: var(--button-bg);
+}
+
+.work-divider {
+    opacity: 0.5;
+}
+
+.work-status {
+    font-size: 0.85em;
+}
+
+.work-desc {
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+.work-tags {
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.work-tags .tag1 {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #d2e4cf;
+    color: #4a6b60;
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.work-tags .tag3 {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #fccfbd;
+    color: #9b3030;
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.work-tags .tag2 {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #e9ebd3;
+    color: #867a34;
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.work-links {
+    display: flex;
+    gap: 20px;
+}
+
+.work-link {
+    color: var(--button-bg);
+    text-decoration: none;
+    font-size: 0.95em;
+    padding: 5px 0;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.work-link:hover {
+    border-bottom-color: var(--button-bg);
+}
+
+/* 即将到来的作品卡片 */
+.work-card.coming-soon {
+    opacity: 0.8;
+}
+
+.work-card.coming-soon .work-cover {
+    border-color: var(--text-light);
+}
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+    .work-card {
+        padding: 1em;
+    }
+        
+}*/
